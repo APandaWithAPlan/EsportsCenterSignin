@@ -1,7 +1,7 @@
 #####################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.2
+# Version 1.2.1
 #####################################
 
 #Import Statements
@@ -79,7 +79,7 @@ while(True):
 
     if(isid(id) == True):
         loghours(id)
-        csvfile = open(csvfilename, "w")
+        csvfile = open(csvfilename, "w",newline='')
         writer = csv.DictWriter(csvfile, fieldnames = field_names)
         writer.writeheader()
         writer.writerows(logdict)
