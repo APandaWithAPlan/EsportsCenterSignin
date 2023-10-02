@@ -1,8 +1,39 @@
-#####################################
+##########################################################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.2.1
-#####################################
+# Version 1.2.1                                                       
+#                                 WNXXXNW                              
+#                              W0xollccloxONNXK000KXNW                 
+#                             Xo;;;::;;;;,:dkkkkOOkkkkkOKW WX000KNW    
+#                            No',,,,,'':oOXW         WXOkxoc::;;:cd0W  
+#                            Nc..''',ckN                 Nkc,,,;;;;;xN 
+#                            Wk'..,xKN                     Nx;',,,,';O 
+#                             Nx';0      NKOOO0NW           W0;.'''.'k 
+#                  WXXXNW      Oo0     Nkl;,,,;lOW   WKOkO0NW O,....lX 
+#               W0o:;;;:cldkKWNodW    Xo;,,..',;xN  Nx:,',;cxXNo..;dX  
+#               K;.',,,,,,'';cc;xW   Wk;,,,'';d0NW  Nk:...,,;dXk:dX    
+#               Xl..'',,,,,,,,.'dKW  Wk:,,,,cOWM0c:dXWO:'',,,:OkoK     
+#                Xo'..'',,,,,,''lO0NWWNkl:;cOWMM0:'oX No;,,,,ckdoN     
+#                 W0o;...''',,,.,dkOO0XXXKKXWMMMMNNWMMWk:,,;:dxckW     
+#                    Xkl;.....''.,lkkkkO0KXXNNWWWWWMMMWXOdooxxcdN      
+#                      WXko;...''..,:ldkkkkkOOO000000000OOkko,:K       
+#                          NOdc;'.....;cllodxkkkkkkkkkkkxoc;...cOW     
+#                             WXd;ckkOOkdollllllllll:::;,''','..'oX    
+#                               koX   WWWNNXKOkxddddc,,;,,,,,,'...:0W  
+#                              WddW          WNK0Okkkd:;;;,,,,,,'..,OW 
+#                              Ndx              WNXK00kl;;;;,,,,,'..,OW
+#                              Xok                  WWNX0l,;;;,,,,'..:K
+#                              Xok                      Wdcoc;;;,,,'.'x
+#                              Ndx                      WddNXkl;;;,'.,O
+#                              WdxW                     XclX  N0xolco0W
+#                               xlONWWWNXXXXNNNNXXKK0kddc',O      WW   
+#                               O;,cool:clodxxxxdol:,..,,,'lN          
+#                               Xc.,,,,,...;dxxxxkd,..',,,';0          
+#                                k'',,,,'.,O       Kc..',,''k          
+#                                No......'xW        No'....,0          
+#                                 Nd:,''cOW          W0o:;cOW          
+#                                  WNKkON               WNW            
+##########################################################################
 
 #Import Statements
 from time import sleep
