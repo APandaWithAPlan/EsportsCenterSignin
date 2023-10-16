@@ -3,3 +3,4 @@ versions
 dist
 build
 esports.spec
+passcheck.py

@@ -1,7 +1,7 @@
 ##########################################################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.2.1                                                       
+# Version 1.3.0                                                       
 #                                 WNXXXNW                              
 #                              W0xollccloxONNXK000KXNW                 
 #                             Xo;;;::;;;;,:dkkkkOOkkkkkOKW WX000KNW    
@@ -40,6 +40,7 @@ from time import sleep
 from datetime import datetime
 import csv
 import os
+import hashlib
 
 #Initialization
 #Collect Date and Time and attempt to create a log folder if one does not already exist
@@ -49,6 +50,10 @@ try:
     os.mkdir("./logs")
 except:
     pass
+
+#init message of the day
+global motd
+motd = ""
 
 #Create a log dictionary and a csv file to store the log
 logdict = [{"id": "000000", "timein": "2020-02-20T12:00:00.000000", "timeout": "2020-02-20T12:00:00.000000"}]
@@ -77,7 +82,66 @@ def loghours(id):
     logdict.append(newsignin)
     return
 
+#Function to check if the user is an admin
+def isadmin(id):
+    hashedid = hashlib.sha256(id.encode()).hexdigest()
+    #decided to hash username in order to keep code open source
+    if hashedid == "833d901914bf64233123da87293334038255e7979b1b44b714df76bef7d343b4":
+        try:
+            os.system('cls')
+            print("Please enter the admin password:")
+            print()
+            password = input()
+            hashed = hashlib.sha256(password.encode()).hexdigest()
+            #decided to hash password in order to keep code open source
+            if hashed == "68b80a63282e38aae95af553cf7f8dada06d627f9eed3b59976b79401207b287":
+                return True
+            else:
+                raise Exception("Invalid Password")
+        except Exception as e:
+            return False
+    else:
+        return False
+    
+#Function to display the admin menu
+def adminmenu():
+    os.system('cls')
+    print("Welcome to the Admin Menu!")
+    print("______________________________")
+    print("Please select an option:")
+    print("1. View Log")
+    print("2. Change MOTD")
+    print("3. Exit")
+    print()
+    print("Enter the number of the option you would like to select and press Enter:")
+    print()
+    option = input()
+    if option == "1":
+        viewlogs()
+    elif option == "2":
+        changemotd()
+    elif option == "3":
+        return
+    
+#Function to view the logs
+def viewlogs():
+    os.system('cls')
+    print(logdict)
+    print()
+    print("Press 'Enter' to return to the Admin Menu")
+    input()
+    adminmenu()
 
+#Function to change the MOTD
+def changemotd():
+    os.system('cls')
+    print("Please type the new MOTD and press 'Enter'")
+    print("OR")
+    print("Just press 'Enter' remove MOTD")
+    print()
+    global motd 
+    motd = input("MOTD: ")
+    adminmenu()
 
 #checks to see if message is valid ID
 def isid(id):
@@ -97,14 +161,17 @@ def isid(id):
             
     except Exception as e:
         return False
+    
+
 #Main Loop
 while(True):
     os.system('cls')
-
     print("Welcome to the LA Tech Esports Center!")
+    if motd != "":
+        print("MOTD: " + motd)
     print("______________________________")
     print()
-    print("Please Enter Your Tech/Moodle Login (abc123) and press Enter:")
+    print("Please Enter Your Tech/Moodle Login (abc123) and press 'Enter':")
     print()
     id = input()
     print()
@@ -117,13 +184,15 @@ while(True):
         writer.writeheader()
         writer.writerows(logdict)
         csvfile.close()
+        print()
+        print("Thank you for using the esports Center!")
+
+    elif(isadmin(id) == True):
+        adminmenu()
     else:
         print("Invalid ID, please try again")
-        sleep(1)
         continue
 
-    print()
-    print("Thank you for using the esports Center!")
     sleep(1)
 
 # You like looking at code, don't you?
