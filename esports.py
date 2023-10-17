@@ -1,7 +1,7 @@
 ##########################################################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.3.0                                                       
+# Version 1.3.1                                                       
 #                                 WNXXXNW                              
 #                              W0xollccloxONNXK000KXNW                 
 #                             Xo;;;::;;;;,:dkkkkOOkkkkkOKW WX000KNW    
@@ -54,6 +54,22 @@ except:
 #init message of the day
 global motd
 motd = ""
+
+try:
+    #attempt to adjust the window
+    import keyboard
+    #attempt to go fullscreen
+    keyboard.press('f11')
+    keyboard.release('f11')
+    #attempt to zoom in and make text bigger
+    keyboard.press('ctrl')
+    x = 0
+    while x<7:
+        keyboard.press_and_release('=')
+        x+=1
+    keyboard.release('ctrl')
+except:
+    pass
 
 #Create a log dictionary and a csv file to store the log
 logdict = [{"id": "000000", "timein": "2020-02-20T12:00:00.000000", "timeout": "2020-02-20T12:00:00.000000"}]
@@ -111,7 +127,8 @@ def adminmenu():
     print("Please select an option:")
     print("1. View Log")
     print("2. Change MOTD")
-    print("3. Exit")
+    print("3. View Number of Users")
+    print("4. Exit")
     print()
     print("Enter the number of the option you would like to select and press Enter:")
     print()
@@ -121,8 +138,31 @@ def adminmenu():
     elif option == "2":
         changemotd()
     elif option == "3":
+        viewnums()
+    elif option == "4":
         return
+    else:
+        print("Invalid Option, please try again")
+        sleep(1)
+        adminmenu()
     
+#Function to view the number of users logged in
+def viewnums():
+    os.system('cls')
+    print("Number of users logged in: ")
+    print()
+    currcounter = 0
+    overcounter = 0
+    for i in logdict:
+        if i["timeout"] == None:
+            currcounter += 1
+        overcounter += 1
+    print(f"Current: {currcounter}, Overall: {overcounter}")
+    print()
+    print("Press 'Enter' to return to the Admin Menu")
+    input()
+    adminmenu()
+
 #Function to view the logs
 def viewlogs():
     os.system('cls')
