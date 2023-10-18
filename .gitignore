@@ -1,6 +1,8 @@
 logs
 versions
 dist
+buildbot.bat
+buildesports.bat
 build
 esports.spec
 bot.spec
@@ -8,3 +10,4 @@ passcheck.py
 token.txt
 num.txt
 keys.txt
+offset.txt

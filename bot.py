@@ -8,7 +8,6 @@ from time import sleep
 with open("token.txt", "r") as f:
         token = f.read()
 
-
 #setup the bot and scheduler
 scheduler = AsyncIOScheduler()
 intents = nextcord.Intents.default()
@@ -25,8 +24,14 @@ async def main():
     with open("num.txt", "r") as f:
         counter = f.read()
 
+
+    with open("offset.txt", "r") as f:
+        offset = f.read()
+        
+    count = int(counter) - int(offset)
+    
     #set the bot's current activity to "with {counter} in the center!"
-    activity = nextcord.Activity(type=nextcord.ActivityType.playing, name=f"with {counter} in the center!")
+    activity = nextcord.Activity(type=nextcord.ActivityType.playing, name=f"with {count} in the center!")
     await pandabot.change_presence(activity=activity)
 
 #final init for the bot, will now refer to it as pandabot

@@ -1,1 +1,0 @@
-pyinstaller --onefile --console --icon=icon.ico bot.py

@@ -1,7 +1,7 @@
 ##########################################################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.4.0                                                       
+# Version 1.5.0                                                       
 #                                 WNXXXNW                              
 #                              W0xollccloxONNXK000KXNW                 
 #                             Xo;;;::;;;;,:dkkkkOOkkkkkOKW WX000KNW    
@@ -84,6 +84,10 @@ csvfile.close()
 with open("num.txt", "w") as f:
     f.write("0")
 
+#Create file to store the offset of users logged in
+with open("offset.txt", "w") as f:
+    f.write("0")
+
 #Function to log hours, VERY VERY concatenated to save space/time, but it works (we love python formatting)
 def loghours(id):
     x = datetime.now() 
@@ -91,7 +95,7 @@ def loghours(id):
 
     for i in logdict:
         if i["id"] == id:
-            if i["timeout"] == None:
+            if i["timeout"] == None or i["timeout"] == "":
                 i["timeout"] = x
                 print()
                 print("User " + id+ " has been signed out")
@@ -132,7 +136,9 @@ def adminmenu():
     print("1. View Log")
     print("2. Change MOTD")
     print("3. View Number of Users")
-    print("4. Exit")
+    print("4. Load Log File")
+    print("5. Set Offset")
+    print("6. Exit")
     print()
     print("Enter the number of the option you would like to select and press Enter:")
     print()
@@ -144,6 +150,10 @@ def adminmenu():
     elif option == "3":
         viewnums()
     elif option == "4":
+        loadlogs()
+    elif option == "5":
+        setoffset()
+    elif option == "6":
         return
     else:
         print("Invalid Option, please try again")
@@ -158,13 +168,82 @@ def viewnums():
     currcounter = 0
     overcounter = 0
     for i in logdict:
-        if i["timeout"] == None:
+        if i["timeout"] == None or i["timeout"] == "":
             currcounter += 1
         overcounter += 1
     print(f"Current: {currcounter}, Overall: {overcounter}")
     print()
     print("Press 'Enter' to return to the Admin Menu")
     input()
+    adminmenu()
+
+#Function to load the logs
+def loadlogs():
+    global logdict
+    os.system('cls')
+    print("Load existing log into current session")
+    print("Enter the name of the log file you would like to load and press 'Enter', otherwise 'Enter' to return: ")
+    filename = input()
+
+    if filename == "":
+        adminmenu()
+
+    filename = "./logs/"+filename
+    if os.path.exists(filename) == False:
+        print("File does not exist, please try again")
+        sleep(1)
+        loadlogs()
+    
+    csvfile = open(filename, "r")
+    reader = csv.DictReader(csvfile)
+    logdict = list(reader)
+    csvfile.close()
+
+    os.system('cls')
+    print("Log file loaded successfully")
+    print("saving...")
+    refreshcurr()
+    sleep(1)
+    print()
+    print("Do you want to remove the old log file?")
+    print("1. Yes")
+    print("2. No")
+    print()
+    print("Enter the number of the option you would like to select and press Enter:")
+    print()
+    option = input()
+    if option == "1" or option == "Yes" or option == "yes" or option == "YES" or option == "y" or option == "Y":
+        os.remove(filename)
+        print("Log file removed successfully")
+        sleep(1)
+    else:
+        print("Log file not removed")
+        sleep(1)
+    adminmenu()
+
+def setoffset():
+    os.system('cls')
+    print("Set the usercount for the number of users currently in the center")
+    print()
+    print("Enter the number of users logged in and press 'Enter', otherwise 'Enter' to return: ")
+    print()
+    print()
+    offset = input()
+    if offset == "":
+        adminmenu()
+    elif offset.isdigit() == False:
+        print("Invalid Input, please try again")
+        sleep(1)
+        setoffset()
+
+    curr = viewnumssmol()
+    curr = curr-int(offset)
+    curr = str(curr)
+    with open("offset.txt", "w") as f:
+        f.write(curr)
+
+    print("Offset set successfully")
+    sleep(1)
     adminmenu()
 
 #Function to view the logs
@@ -191,7 +270,7 @@ def changemotd():
 def viewnumssmol():
     currcounter = 0
     for i in logdict:
-        if i["timeout"] == None:
+        if i["timeout"] == None or i["timeout"] == "":
             currcounter += 1
 
     return currcounter
@@ -215,6 +294,15 @@ def isid(id):
     except Exception as e:
         return False
     
+def refreshcurr():
+    global csvfilename
+    global logdict
+    csvfile = open(csvfilename, "w",newline='')
+    writer = csv.DictWriter(csvfile, fieldnames = field_names)
+    writer.writeheader()
+    writer.writerows(logdict)
+    csvfile.close()
+    return
 
 #Main Loop
 os.startfile("bot.exe")
@@ -242,16 +330,16 @@ while(True):
         print()
         print("Thank you for using the esports Center!")
 
-        #update the number of users logged in for the discord bot
-        x = viewnumssmol()
-        with open("num.txt", "w") as f:
-            f.write(str(x))
-
     elif(isadmin(id) == True):
         adminmenu()
     else:
         print("Invalid ID, please try again")
         continue
+
+    #update the number of users logged in for the discord bot
+    x = viewnumssmol()
+    with open("num.txt", "w") as f:
+        f.write(str(x))
 
     sleep(1)
 
