@@ -1,1 +1,1 @@
-pyinstaller --onefile --console --icon=icon.ico esports.py
+pyinstaller --onefile --console --icon=icon.ico bot.py

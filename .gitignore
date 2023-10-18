@@ -3,4 +3,8 @@ versions
 dist
 build
 esports.spec
+bot.spec
 passcheck.py
+token.txt
+num.txt
+keys.txt

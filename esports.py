@@ -1,7 +1,7 @@
 ##########################################################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.3.1                                                       
+# Version 1.4.0                                                       
 #                                 WNXXXNW                              
 #                              W0xollccloxONNXK000KXNW                 
 #                             Xo;;;::;;;;,:dkkkkOOkkkkkOKW WX000KNW    
@@ -79,6 +79,10 @@ csvfilename = csvfilename.replace(":", "")
 csvfilename = "./logs/"+csvfilename
 csvfile = open(csvfilename, "w")
 csvfile.close()
+
+#Create file to store the number of users logged in
+with open("num.txt", "w") as f:
+    f.write("0")
 
 #Function to log hours, VERY VERY concatenated to save space/time, but it works (we love python formatting)
 def loghours(id):
@@ -183,6 +187,15 @@ def changemotd():
     motd = input("MOTD: ")
     adminmenu()
 
+#Function to view the number of users logged in, but truncated to not show anything on the screen
+def viewnumssmol():
+    currcounter = 0
+    for i in logdict:
+        if i["timeout"] == None:
+            currcounter += 1
+
+    return currcounter
+
 #checks to see if message is valid ID
 def isid(id):
     try:
@@ -204,6 +217,8 @@ def isid(id):
     
 
 #Main Loop
+os.startfile("bot.exe")
+
 while(True):
     os.system('cls')
     print("Welcome to the LA Tech Esports Center!")
@@ -226,6 +241,11 @@ while(True):
         csvfile.close()
         print()
         print("Thank you for using the esports Center!")
+
+        #update the number of users logged in for the discord bot
+        x = viewnumssmol()
+        with open("num.txt", "w") as f:
+            f.write(str(x))
 
     elif(isadmin(id) == True):
         adminmenu()
