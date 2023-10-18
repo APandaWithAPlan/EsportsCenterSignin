@@ -5,8 +5,14 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from time import sleep
 
 #read the bot token from a file to keep code open source
-with open("token.txt", "r") as f:
-        token = f.read()
+
+try:
+    with open("token.txt", "r") as f:
+            token = f.read()
+except:
+    print("Please create a file called token.txt and put your bot token in it.")
+    sleep(5)
+    exit()
 
 #setup the bot and scheduler
 scheduler = AsyncIOScheduler()
