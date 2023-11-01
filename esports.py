@@ -1,7 +1,7 @@
 ##########################################################################
 # Login System for The LATech Esports Center
 # Made By: Nicholas Cervantes
-# Version 1.5.0                                                       
+# Version 1.5.2                                                       
 #                                 WNXXXNW                              
 #                              W0xollccloxONNXK000KXNW                 
 #                             Xo;;;::;;;;,:dkkkkOOkkkkkOKW WX000KNW    
